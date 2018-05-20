@@ -1,9 +1,10 @@
 # a list of features to implement in the program in no specifi order
 
-1. merge the input getting functions into one [DONE]
+1. [DONE] merge the input getting functions into one
 2. also accept kinematic viscosity instead of density and dynamic viscosity
 3. accept other units in addition to the default SI units
 4. give room to change the unknown from Reynolds number to other variables
-5. validate user input
+5. [DONE] validate user input
+6. GUI
 
 Next feature to implement: 1

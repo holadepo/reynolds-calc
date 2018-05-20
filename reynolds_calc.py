@@ -21,12 +21,20 @@ def getInput(variable):
                 }
 
     inputValue = None
-    try:
-        inputValue = float(input(message[variable]))
-    except KeyError:
-        print('variable \'{0}\' not recognised'.format(variable))
-        print('Program terminated\n')
-        sys.exit()
+    while True:
+        try:
+            inputValue = float(input(message[variable]))
+        except KeyError:
+            print('variable \'{0}\' not recognised'.format(variable))
+            print('Program terminated\n')
+            sys.exit()
+        except ValueError:
+            print('Invalid input, please try again')
+            continue
+        else:
+            # successful read
+            break
+
     return inputValue
 
 def main():
@@ -40,7 +48,7 @@ def main():
     # inputs
     density = getInput('density')
     velocity = getInput('velocity')
-    length = getInput('velocity')
+    length = getInput('length')
     dynViscosity = getInput('dynViscosity')
 
     reynoldsNo = (density * velocity * length) / dynViscosity
