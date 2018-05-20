@@ -1,16 +1,45 @@
 #!/usr/bin/env python3
 
-def main():
-    # get density, flow velocity, length and viscosity from user,
-    # then calculte Reynolds number
-
+def getDensity():
+    """
+    Get fluid density from user
+    """
     density = float(input('fluid density [kg/m^3] : '))
-    velocity = float(input('flow velocity [m/s] : '))
-    length = float(input('length [m] : '))
-    viscosity = float(input('fluid viscosity [kg/(m.s)] : '))
+    return density
 
-    reynolds_no = (density * velocity * length) / viscosity
-    print('Renynolds number = {0}'.format(reynolds_no))
+def getVelocity():
+    """
+    Get free stream flow velocity from user
+    """
+    velocity = float(input('flow velocity [m/s] : '))
+    return velocity
+
+def getLength():
+    """
+    Get length from user
+    """
+    length = float(input('length [m] : '))
+    return length
+
+def getDynViscosity():
+    """
+    Get fluid dynamic viscosity from user
+    """
+    dynViscosity = float(input('fluid dynamic viscosity [kg/(m.s)] : '))
+    return dynViscosity
+
+def main():
+    """
+    Main program logic
+    """
+
+    density = getDensity()
+    velocity = getVelocity()
+    length = getLength()
+    dynViscosity = getDynViscosity()
+
+    reynoldsNo = (density * velocity * length) / dynViscosity
+    print('Renynolds number = {0}'.format(reynoldsNo))
 
     return
 
