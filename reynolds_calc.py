@@ -64,52 +64,59 @@ def main():
         3: 'Flow velocity',
         4: 'Length',
         5: 'Dynamic viscosity',
-        #6: 'Kinematic viscosity'
+        #6: 'Kinematic viscosity',
+        0: 'Exit'
     }
 
-    # display options
     print('Reynolds Number Calculator\n')
-    print('What do you want to calculate?')
-    for i in options.keys():
-        print('{0}. {1}'.format(i, options[i]))
-    print('')
-    
-    # validate input
-    option = None
+
+    # main program loop
     while True:
-        option = (input('Please select an option (default: 1) (1/2/3/4/5): ')).strip()
-        if option == '':
-            # this is the default, that is, Reynolds no
-            option = 1
+        # display options
+        print('What do you want to calculate?')
+        for i in options.keys():
+            print('{0}. {1}'.format(i, options[i]))
+        print('')
+        
+        # validate input
+        option = None
+        while True:
+            option = (input('Please select an option (default: 1) (1/2/3/4/5/0): ')).strip() #Todo: the numbers can be extracted automatically
+            if option == '':
+                # this is the default, that is, Reynolds no
+                option = 1
+                break
+
+            try:
+                option = int(float(option))
+            except:
+                print('Invalid option, please try again')
+                continue
+
+            if option in options.keys():
+                break
+            else:
+                print('Invalid option, please try again')
+                continue
+        print('')
+
+        #process option
+        output = None
+        if option == 0:
+            print('Exiting ...') # Todo: confirm whether user is sure
             break
+        if option == 1:
+            output = calcReynolsNo()
+        elif option == 2:
+            output = calcDensity()
+        elif option == 3:
+            output = calcVelocity()
+        elif option == 4:
+            output = calcLength()
+        elif option == 5:
+            output = calcDynViscosity()
 
-        try:
-            option = int(float(option))
-        except:
-            print('Invalid option, please try again')
-            continue
-
-        if option in options.keys():
-            break
-        else:
-            print('Invalid option, please try again')
-            continue
-    print('')
-
-    #process option
-    output = None
-    if option == 1:
-        output = calcReynolsNo()
-    elif option == 2:
-        output = calcDensity()
-    elif option == 3:
-        output = calcVelocity()
-    elif option == 4:
-        output = calcLength()
-    elif option == 5:
-        output = calcDynViscosity()
-
-    print('{0} = {1}'.format(options[option], output))
+        print('{0} = {1}\n'.format(options[option], output))
 
     '''
     # inputs
