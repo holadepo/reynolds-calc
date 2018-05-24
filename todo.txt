@@ -3,8 +3,10 @@
 1. [DONE] merge the input getting functions into one
 2. also accept kinematic viscosity instead of density and dynamic viscosity
 3. accept other units in addition to the default SI units
-4. give room to change the unknown from Reynolds number to other variables
+4. [DONE] give room to change the unknown from Reynolds number to other variables
 5. [DONE] validate user input
 6. GUI
+7. Switch to OOP
+8. Tell unit of output
 
-Next feature to implement: 1
+Next feature to implement: 2

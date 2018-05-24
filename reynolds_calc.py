@@ -17,7 +17,7 @@ def getInput(variable):
         'length'        :'length [m] : ',
         'dynViscosity'  :'fluid dynamic viscosity [kg/(m.s)] : ',
         'kinViscosity'  :'fluid kinematic viscosity [m^2/s] : ',
-        'reynoldsNo'    :'flow Reynolds number'
+        'reynoldsNo'    :'flow Reynolds number : '
     }
 
     inputValue = None
@@ -38,20 +38,80 @@ def getInput(variable):
     return inputValue
 
 
-def calcReynolsNo():
-    return 0
+def calcReynoldsNo():
+    '''
+    Calculate Reynolds number
+    RETURNS:
+    reynoldsNo (float)
+    '''
+    
+    density = getInput('density')
+    velocity = getInput('velocity')
+    length = getInput('length')
+    dynViscosity = getInput('dynViscosity')
+    reynoldsNo = (density * velocity * length) / dynViscosity
+
+    return reynoldsNo
 
 def calcDensity():
-    return 0
+    '''
+    Calculate density
+    RETURNS:
+    density (float)
+    '''
+
+    velocity = getInput('velocity')
+    length = getInput('length')
+    dynViscosity = getInput('dynViscosity')
+    reynoldsNo = getInput('reynoldsNo')
+    density = (dynViscosity * reynoldsNo) / (velocity * length)
+
+    return density
         
 def calcVelocity():
-    return 0
+    '''
+    Calculate velocity
+    RETURNS:
+    velocity (float)
+    '''
+
+    density = getInput('density')
+    length = getInput('length')
+    dynViscosity = getInput('dynViscosity')
+    reynoldsNo = getInput('reynoldsNo')
+    velocity = (dynViscosity * reynoldsNo) / (density * length)
+
+    return velocity
 
 def calcLength():
-    return 0
+    '''
+    Calculate length
+    RETURNS:
+    length (float)
+    '''
+
+    density = getInput('density')
+    velocity = getInput('velocity')
+    dynViscosity = getInput('dynViscosity')
+    reynoldsNo = getInput('reynoldsNo')
+    length = (dynViscosity * reynoldsNo) / (density * velocity)
+
+    return length
         
 def calcDynViscosity():
-    return 0
+    '''
+    Calculate dynamic viscosity
+    RETURNS:
+    dynViscosity (float)
+    '''
+    
+    density = getInput('density')
+    velocity = getInput('velocity')
+    length = getInput('length')
+    reynoldsNo = getInput('reynoldsNo')
+    dynViscosity = (density * velocity * length) / reynoldsNo
+    
+    return dynViscosity
 
 def main():
     """
@@ -65,7 +125,6 @@ def main():
         4: 'Length',
         5: 'Dynamic viscosity',
         #6: 'Kinematic viscosity',
-        0: 'Exit'
     }
 
     print('Reynolds Number Calculator\n')
@@ -77,6 +136,7 @@ def main():
         for i in options.keys():
             print('{0}. {1}'.format(i, options[i]))
         print('')
+        print('0. Exit\n')
         
         # validate input
         option = None
@@ -93,7 +153,7 @@ def main():
                 print('Invalid option, please try again')
                 continue
 
-            if option in options.keys():
+            if option == 0 or option in options.keys():
                 break
             else:
                 print('Invalid option, please try again')
@@ -106,7 +166,7 @@ def main():
             print('Exiting ...') # Todo: confirm whether user is sure
             break
         if option == 1:
-            output = calcReynolsNo()
+            output = calcReynoldsNo()
         elif option == 2:
             output = calcDensity()
         elif option == 3:
@@ -116,21 +176,8 @@ def main():
         elif option == 5:
             output = calcDynViscosity()
 
-        print('{0} = {1}\n'.format(options[option], output))
+        print('\n{0} = {1}\n'.format(options[option], output))
 
-    '''
-    # inputs
-    density = getInput('density')
-    velocity = getInput('velocity')
-    length = getInput('length')
-    dynViscosity = getInput('dynViscosity')
-
-    reynoldsNo = (density * velocity * length) / dynViscosity
-    print('Renynolds number = {0}'.format(reynoldsNo))
-    '''
-   # spacing: for clarity
-    print('')
-    
     return
 
 main()
